@@ -7,16 +7,18 @@ import (
 	"path"
 )
 
-const DBURL = "postgres://postgres:postgres@localhost:5432/gator?sslmode=disable"
-const configFileName = ".gatorconfig.json"
+const (
+	DBURL          = "postgres://postgres:postgres@localhost:5432/gator?sslmode=disable"
+	configFileName = ".gatorconfig.json"
+)
 
 type Config struct {
 	DBURL           string `json:"db_url"`
-	CurrentUsername string `json:"current_username"`
+	CurrentUserName string `json:"current_username"`
 }
 
 func (c *Config) SetUser(username string) error {
-	c.CurrentUsername = username
+	c.CurrentUserName = username
 
 	return writeToConfig(c)
 }
