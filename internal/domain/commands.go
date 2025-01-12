@@ -4,9 +4,7 @@ import (
 	"fmt"
 )
 
-type Handler interface {
-	Handle(s *State, c *Command) error
-}
+type Handler func(*State, *Command) error
 
 type Commands struct {
 	Handlers map[string]Handler
@@ -22,5 +20,5 @@ func (c *Commands) Run(s *State, cmd *Command) error {
 		return fmt.Errorf("unknown command: %s", cmd.Name)
 	}
 
-	return command.Handle(s, cmd)
+	return command(s, cmd)
 }
